@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load concentration_tags %}
+
+{% block content %}
+  <div class="flex flex-wrap justify-center">
+    {% if cards %}
+      {% for card in cards %}
+        <div class="w-2/12 md:w-24 lg:w-32 m-1">
+          <div data-id="{{ card|get_item:'id' }}"
+               data-value="{{ card|get_item:'value' }}"
+               class="relative transition-transform transform-preserve-3d w-full
+                      {% if not card|get_item:'hidden' %} rotate-y-180 {% endif %}">
+            <div class="absolute inset-0 backface-hidden transition-bg hover:bg-light-gold
+                        bg-gold rotate-y-180 rounded-lg flex justify-center items-center
+                        text-3xl md:text-6xl">
+              <i class="fa fa-{{ card|get_item:'value' }} text-gray-900"></i>
+            </div>
+            <div class="absolute inset-0 backface-hidden transition-transform hover:scale-98">
+              <img class="card-img rounded-lg object-contain w-full h-full"
+                   src="{% static 'concentration\img\back-card.jpg' %}"
+                   alt="back-card">
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+{% endblock %}

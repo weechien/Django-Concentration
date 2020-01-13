@@ -1,0 +1,92 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="{% static 'the_concentration\css\style.css' %}">
+    <link rel="stylesheet" href="{% static 'the_concentration\css\fa-all.css' %}">
+    
+    <title>Concentration</title>
+  </head>
+  <body class="bg-gray-900">
+    <header class="md:flex md:justify-between md:items-center md:px-4 md:py-1 bg-gray-400">
+      <div class="flex items-center justify-between px-4 py-3">
+        <div class="flex items-center justify-between">
+          <img class="h-8" src="{% static 'the_concentration\img\logo.svg' %}" alt="logo">
+          <div class="ml-3 font-bold text-lg">Concentration</div>
+        </div>
+        <div class="md:hidden">
+          <button onclick="toggleNav()" class="block text-gray-700 hover:text-black focus:text-black focus:outline-none">
+            <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <nav id="nav" class="absolute z-10 bg-gray-400 w-full px-2 pt-2 pb-4 opacity-0 md:opacity-100 md:static md:w-auto md:flex md:p-0
+                           transition-opacity transition-500 transition-linear pointer-events-none md:pointer-events-auto">
+        <a href="#" onclick="displayResetModal('show', 'Start a new game?', 8)"
+           data-count="8"
+           class="block px-2 py-1 font-semibold rounded hover:bg-gray-300
+                  {% if card_num and card_num == 8 %} bg-gray-300 pointer-events-none active {% endif %}">
+           8-cards
+        </a>
+        <a href="#" onclick="displayResetModal('show', 'Start a new game?', 14)"
+           data-count="14"
+           class="block px-2 py-1 font-semibold rounded hover:bg-gray-300 mt-1 md:mt-0 md:ml-2
+                  {% if card_num and card_num == 14 %} bg-gray-300 pointer-events-none active {% endif %}">
+           14-cards
+        </a>
+        <a href="#" onclick="displayResetModal('show', 'Start a new game?', 20)"
+           data-count="20"
+           class="block px-2 py-1 font-semibold rounded hover:bg-gray-300 mt-1 md:mt-0 md:ml-2
+                  {% if card_num and card_num == 20 %} bg-gray-300 pointer-events-none active {% endif %}">
+           20-cards
+        </a>
+        <a href="#" onclick="displayResetModal('show', 'Start a new game?', 30)"
+           data-count="30"
+           class="block px-2 py-1 font-semibold rounded hover:bg-gray-300 mt-1 md:mt-0 md:ml-2
+                  {% if card_num and card_num == 30 %} bg-gray-300 pointer-events-none active {% endif %}">
+           30-cards
+        </a>
+      </nav>
+    </header>
+    
+    <div class="flex items-center mb-3 md:mb-6">
+      <div class="flex justify-center items-center bg-pink-400 w-full font-semibold text-xl">
+        <div id="timerDisplay" class="flex">
+            00:00
+        </div>
+        <div id="reset-button" class="flex absolute ml-10 mt-px opacity-0 transition-opacity">
+          <i class="fa fa-redo text-xs text-pink-700 hover:text-pink-600 cursor-pointer"></i>
+        </div>
+      </div>
+    </div>
+
+    <div id="reset-modal" class="fixed inset-0 w-full h-full z-50 hidden">
+      <div id="reset-modal-bg" class="fixed inset-0 w-full h-full bg-gray-900 opacity-75"></div>
+      <div class="border rounded w-10/12 md:w-5/12 lg:w-4/12 xl:w-3/12 mx-auto mt-40 p-4 bg-gray-100 absolute inset-x-0">
+        <span id="reset-modal-close"
+              class="text-2xl font-bold text-gray-700 cursor-pointer no-underline absolute mr-3 right-0 top-0">
+          &times;
+        </span>
+        <span id="reset-modal-text" class="text-md md:text-xl font-bold text-gray-700">
+        </span>
+        <hr class="my-4">
+        <div class="flex flex-row-reverse mt-2">
+          <button id="reset-no" class="border border-red-700 rounded text-red-700 px-5 py-1 ml-3">No</button>
+          <button id="reset-yes" class="border border-green-700 rounded text-green-700 px-5 py-1 ml-3">Yes</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-11/12 md:w-10/12 mx-auto my-2 md:my-4">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+  <script src="{% static 'concentration\js\all.js' %}"></script>
+</html>
