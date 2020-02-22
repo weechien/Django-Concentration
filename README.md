@@ -1,4 +1,4 @@
-# Django-Concentration 👯
+# Concentration-Django 👯
 
 Flip cards over and find at least a pair of matching cards to play the game:
 
